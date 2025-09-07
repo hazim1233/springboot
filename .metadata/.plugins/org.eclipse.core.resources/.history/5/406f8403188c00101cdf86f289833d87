@@ -2,7 +2,7 @@ package com.example.demo;
 
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
-@CrossOrigin(origins = "https://springboot-12.onrender.com")
+
 @RestController
 @RequestMapping("/persons")
 public class PersonController {
