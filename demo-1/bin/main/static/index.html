@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+    <meta charset="UTF-8">
+    <title>Osobe App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <h1>Osobe App</h1>
+        <p>Dodaj, pregledaj i obriši osobe u bazi</p>
+    </header>
+
+    <!-- Main content -->
+    <main>
+        <!-- Forma za dodavanje osobe -->
+        <section class="card">
+            <h2>Dodaj osobu</h2>
+            <form id="personForm">
+                <label for="name">Ime:</label>
+                <input type="text" id="name" value="Hazim">
+
+                <label for="age">Godine:</label>
+                <input type="number" id="age" value="30">
+
+                <button type="submit">Dodaj u bazu</button>
+            </form>
+        </section>
+
+        <!-- Lista osoba -->
+        <section class="card">
+            <button id="loadPersons">Prikaži sve osobe</button>
+            <h2>Lista osoba:</h2>
+            <ul id="personList"></ul>
+        </section>
+
+        <p id="response"></p>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        &copy; 2025 Hazim Delić
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
