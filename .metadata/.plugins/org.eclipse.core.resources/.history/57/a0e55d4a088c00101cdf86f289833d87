@@ -5,7 +5,7 @@ FROM openjdk:17-jdk-slim
 WORKDIR /app
 
 # Kopiramo buildani .jar fajl u container
-COPY build/libs/demo-1-0.0.1-SNAPSHOT-plain.jar app.jar
+COPY build/libs/demo-1-0.0.1-SNAPSHOT.jar app.jar
 
 # Izloži port 8080 (Spring Boot default)
 EXPOSE 8080
