@@ -1,0 +1,14 @@
+# Koristimo OpenJDK 17 kao bazni image
+FROM openjdk:17-jdk-slim
+
+# Postavimo radni direktorij
+WORKDIR /app
+
+# Kopiramo buildani .jar fajl u container
+COPY build/libs/demo-1-0.0.1-SNAPSHOT.jar app.jar
+
+# Izloži port 8080 (Spring Boot default)
+EXPOSE 8080
+
+# Start command za pokretanje aplikacije
+ENTRYPOINT ["java", "-jar", "app.jar"]
