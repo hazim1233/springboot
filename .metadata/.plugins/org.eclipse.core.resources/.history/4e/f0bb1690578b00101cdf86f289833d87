@@ -1,0 +1,46 @@
+package com.example.demo;
+
+import org.springframework.web.bind.annotation.*;
+import java.util.List;
+
+@RestController
+@RequestMapping("/persons")
+public class PersonController {
+
+    private final PersonRepository repository;
+
+    public PersonController(PersonRepository repository) {
+        this.repository = repository;
+    }
+
+    @GetMapping
+    public List<Person> getAllPersons() {
+        return repository.findAll();
+    }
+
+    @GetMapping("/{id}")
+    public Person getPerson(@PathVariable Long id) {
+        return repository.findById(id).orElseThrow();
+    }
+
+    @PostMapping
+    public Person createPerson(@RequestBody Person person) {
+        return repository.save(person);
+    }
+
+    @PutMapping("/{id}")
+    public Person updatePerson(@PathVariable Long id, @RequestBody Person newPerson) {
+        return repository.findById(id)
+                .map(person -> {
+                    person.setName(newPerson.getName());
+                    person.setAge(newPerson.getAge());
+                    return repository.save(person);
+                })
+                .orElseThrow();
+    }
+
+    @DeleteMapping("/{id}")
+    public void deletePerson(@PathVariable Long id) {
+        repository.deleteById(id);
+    }
+}

@@ -1,0 +1,20 @@
+package com.example.demo;
+
+public class Person {
+    private String ime;
+    private int godine;
+
+    // getter i setter (obavezni)
+    public String getIme() {
+        return ime;
+    }
+    public void setIme(String ime) {
+        this.ime = ime;
+    }
+    public int getGodine() {
+        return godine;
+    }
+    public void setGodine(int godine) {
+        this.godine = godine;
+    }
+}

@@ -1,0 +1,58 @@
+
+       const form = document.getElementById('personForm');
+       const responseParagraph = document.getElementById('response');
+       const loadBtn = document.getElementById('loadPersons');
+       const personList = document.getElementById('personList');
+
+       // POST - dodavanje osobe
+       form.addEventListener('submit', async (event) => {
+           event.preventDefault();
+
+           const name = document.getElementById('name').value;
+           const age = parseInt(document.getElementById('age').value);
+
+           const data = { name: name, age: age };
+
+           try {
+               const res = await fetch('http://localhost:8080/persons', {
+                   method: 'POST',
+                   headers: {
+                       'Content-Type': 'application/json'
+                   },
+                   body: JSON.stringify(data)
+               });
+
+               if (res.ok) {
+                   const result = await res.json();
+                   responseParagraph.textContent = `Osoba dodata: ${result.name}, ${result.age} godina`;
+               } else {
+                   responseParagraph.textContent = `Greška: ${res.status}`;
+               }
+           } catch (err) {
+               responseParagraph.textContent = `Greška: ${err.message}`;
+           }
+       });
+
+       // GET - preuzimanje svih osoba
+       loadBtn.addEventListener('click', async () => {
+           personList.innerHTML = ""; // očisti listu pre novog učitavanja
+           try {
+               const res = await fetch('http://localhost:8080/persons');
+               if (res.ok) {
+                   const persons = await res.json();
+                   if (persons.length === 0) {
+                       personList.innerHTML = "<li>Nema osoba u bazi.</li>";
+                   } else {
+                       persons.forEach(p => {
+                           const li = document.createElement('li');
+                           li.textContent = `${p.name}, ${p.age} godina (id=${p.id})`;
+                           personList.appendChild(li);
+                       });
+                   }
+               } else {
+                   personList.innerHTML = `<li>Greška: ${res.status}</li>`;
+               }
+           } catch (err) {
+               personList.innerHTML = `<li>Greška: ${err.message}</li>`;
+           }
+       });

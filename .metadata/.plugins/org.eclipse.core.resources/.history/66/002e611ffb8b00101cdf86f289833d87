@@ -1,0 +1,123 @@
+/* --- Body i osnovni font --- */
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to right, #e0f7fa, #f4f6f9);
+    margin: 40px;
+    color: #333;
+}
+
+/* --- Naslovi --- */
+h1 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+h2 {
+    font-size: 22px;
+    margin-top: 30px;
+    margin-bottom: 15px;
+}
+
+/* --- Kartice (forma i lista) --- */
+.card, li {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    margin-bottom: 20px;
+    transition: all 0.3s ease;
+    max-width: 400px;
+}
+
+.card:hover, li:hover {
+    box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+    transform: translateY(-3px);
+}
+
+/* --- Label i input --- */
+label {
+    font-weight: bold;
+    display: block;
+    margin: 10px 0 5px;
+}
+
+input {
+    padding: 8px;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+}
+
+input:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0,123,255,0.5);
+}
+
+/* --- Dugmad --- */
+button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+/* --- Lista osoba --- */
+ul {
+    list-style-type: none;
+    padding: 0;
+    max-width: 400px;
+}
+
+li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    margin: 6px 0;
+    border-radius: 6px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+/* --- Dugme za brisanje u listi --- */
+li button {
+    background-color: #e74c3c;
+    padding: 5px 10px;
+    font-size: 12px;
+}
+
+li button:hover {
+    background-color: #c0392b;
+}
+
+/* --- Centriranje elemenata --- */
+#personForm, #loadPersons {
+    display: block;
+    margin: 0 auto;
+}
+
+/* --- Responsivno (malo bolje na mobilnim) --- */
+@media (max-width: 500px) {
+    body {
+        margin: 20px;
+    }
+
+    .card, li, ul {
+        max-width: 100%;
+    }
+}

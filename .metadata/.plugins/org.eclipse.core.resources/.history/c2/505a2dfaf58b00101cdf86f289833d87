@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dodaj osobu</title>
+</head>
+<body>
+    <h1>Dodaj osobu</h1>
+    <form id="personForm">
+        <label for="name">Ime:</label>
+        <input type="text" id="name" value="Hazim"><br><br>
+
+        <label for="age">Godine:</label>
+        <input type="number" id="age" value="30"><br><br>
+
+        <button type="submit">Dodaj u bazu</button>
+    </form>
+
+    <p id="response"></p>
+
+    <script>
+        const form = document.getElementById('personForm');
+        const responseParagraph = document.getElementById('response');
+
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault(); // ne reload-uje stranicu
+
+            const name = document.getElementById('name').value;
+            const age = parseInt(document.getElementById('age').value);
+
+            const data = { name: name, age: age };
+
+            try {
+                const res = await fetch('http://localhost:8080/persons', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                if (res.ok) {
+                    const result = await res.json();
+                    responseParagraph.textContent = `Osoba dodata: ${result.name}, ${result.age} godina`;
+                } else {
+                    responseParagraph.textContent = `Greška: ${res.status}`;
+                }
+            } catch (err) {
+                responseParagraph.textContent = `Greška: ${err.message}`;
+            }
+        });
+    </script>
+</body>
+</html>

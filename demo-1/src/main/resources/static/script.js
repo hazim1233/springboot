@@ -1,0 +1,67 @@
+
+       const form = document.getElementById('personForm');
+       const responseParagraph = document.getElementById('response');
+       const loadBtn = document.getElementById('loadPersons');
+       const personList = document.getElementById('personList');
+
+       // POST - dodavanje osobe
+       form.addEventListener('submit', async (event) => {
+           event.preventDefault();
+
+           const name = document.getElementById('name').value;
+           const age = parseInt(document.getElementById('age').value);
+
+           const data = { name: name, age: age };
+
+           try {
+               const res = await fetch('http://localhost:8080/persons', {
+                   method: 'POST',
+                   headers: {
+                       'Content-Type': 'application/json'
+                   },
+                   body: JSON.stringify(data)
+               });
+
+               if (res.ok) {
+                   const result = await res.json();
+                   responseParagraph.textContent = `Osoba dodata: ${result.name}, ${result.age} godina`;
+               } else {
+                   responseParagraph.textContent = `Greška: ${res.status}`;
+               }
+           } catch (err) {
+               responseParagraph.textContent = `Greška: ${err.message}`;
+           }
+       });
+
+       loadBtn.addEventListener('click', async () => {
+           try {
+               const res = await fetch('/persons');
+               const persons = await res.json();
+
+               personList.innerHTML = '';
+               persons.forEach(p => {
+                   const li = document.createElement('li');
+                   li.textContent = `${p.name} (${p.age} godina) `;
+
+                   const delBtn = document.createElement('button');
+                   delBtn.textContent = "Obriši";
+                   delBtn.addEventListener('click', async () => {
+                       try {
+                           const res = await fetch(`/persons/${p.id}`, { method: 'DELETE' });
+                           if (res.ok) {
+                               li.remove();
+                           } else {
+                               alert(`Greška kod brisanja: ${res.status}`);
+                           }
+                       } catch (err) {
+                           alert(`Greška: ${err.message}`);
+                       }
+                   });
+
+                   li.appendChild(delBtn);
+                   personList.appendChild(li);
+               });
+           } catch (err) {
+               personList.innerHTML = `<li>Greška: ${err.message}</li>`;
+           }
+       });

@@ -1,0 +1,62 @@
+package com.example.demo;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import java.util.*;
+@RestController
+@RequestMapping("/persons")
+public class PersonController {
+	 private Map<Long, Person> persons = new HashMap<>();
+	    private Long nextId = 1L;
+
+	    // CREATE (POST)
+	    @PostMapping
+	    public Person createPerson(@RequestBody Person person) {
+	        person.setId(nextId++);
+	        persons.put(person.getId(), person);
+	        return person;
+	    }
+
+	    // READ ALL (GET)
+	    @GetMapping
+	    public Collection<Person> getAllPersons() {
+	        return persons.values();
+	    }
+
+	    // READ ONE (GET)
+	    @GetMapping("/{id}")
+	    public ResponseEntity<Person> getPersonById(@PathVariable("id") Long id) {
+	        Person person = persons.get(id);
+	        if (person != null) {
+	            return ResponseEntity.ok(person);
+	        } else {
+	            return ResponseEntity.notFound().build();
+	        }
+	    }
+
+
+
+	    // UPDATE (PUT)
+	    @PutMapping("/{id}")
+	    public ResponseEntity<Person> updatePerson(@PathVariable("id") Long id, @RequestBody Person newPerson) {
+	        Person existing = persons.get(id);
+	        if (existing != null) {
+	            existing.setIme(newPerson.getIme());
+	            existing.setGodine(newPerson.getGodine());
+	            persons.put(id, existing);
+	            return ResponseEntity.ok(existing);
+	        } else {
+	            return ResponseEntity.notFound().build();
+	        }
+	    }
+
+
+	    // DELETE
+	    @DeleteMapping("/{id}")
+	    public String deletePerson(@PathVariable Long id) {
+	        persons.remove(id);
+	        return "Person with id " + id + " deleted.";
+	    }
+	
+
+}

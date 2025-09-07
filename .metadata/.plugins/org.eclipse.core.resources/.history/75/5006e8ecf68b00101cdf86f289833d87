@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dodaj osobu</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Dodaj osobu</h1>
+    <form id="personForm">
+        <label for="name">Ime:</label>
+        <input type="text" id="name" value="Hazim"><br><br>
+
+        <label for="age">Godine:</label>
+        <input type="number" id="age" value="30"><br><br>
+
+        <button type="submit">Dodaj u bazu</button>
+    </form>
+
+    <p id="response"></p>
+
+    <hr>
+
+    <h2>Sve osobe</h2>
+    <button id="loadPersons">Prikaži osobe</button>
+    <ul id="personList"></ul>
+
+</body>
+</html>
