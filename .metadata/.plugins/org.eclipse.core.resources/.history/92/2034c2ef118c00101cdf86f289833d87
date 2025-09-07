@@ -1,0 +1,15 @@
+# Ime aplikacije
+spring.application.name=demo-1
+spring.datasource.hikari.maximum-pool-size=3
+spring.datasource.hikari.minimum-idle=1
+
+# PostgreSQL baza na Renderu
+spring.datasource.url=jdbc:postgresql://dpg-d2uq907fte5s73bep07g-a.oregon-postgres.render.com:5432/moja_baza_dv9e
+spring.datasource.username=moja_baza_dv9e_user
+spring.datasource.password=CFSTmCqoeHH6oiZXTgFeHGk6OlhHXCPJ
+spring.datasource.driver-class-name=org.postgresql.Driver
+
+# Hibernate/PostgreSQL konfiguracija
+spring.jpa.database-platform=org.hibernate.dialect.PostgreSQLDialect
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
