@@ -1,22 +1,9 @@
-# Stage 1: build Gradle projekta
-FROM gradle:7.6-jdk17 AS builder
-WORKDIR /app
-
-# Kopiramo sve fajlove projekta u container
-COPY . .
-
-# Buildamo .jar fajl
-RUN gradle clean build --no-daemon
-
-# Stage 2: run
+# Koristimo OpenJDK 17
 FROM openjdk:17-jdk-slim
 WORKDIR /app
 
-# Kopiramo buildani .jar iz builder stage-a
-COPY --from=builder /app/demo-1/build/libs/*.jar app.jar
+# Kopiramo buildani jar (prethodno buildan lokalno)
+COPY build/libs/demo-1-0.0.1-SNAPSHOT.jar app.jar
 
-# Expose port 8080 (Spring Boot default)
 EXPOSE 8080
-
-# Start command
-ENTRYPOINT ["java","-jar","app.jar"]
+ENTRYPOINT ["java", "-jar", "app.jar"]
